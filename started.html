@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sing-in</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .container h2 {
+      display: flex;
+      justify-content: center;
+      padding-bottom: 20px;
+    }
+
+    .container h2 span {
+      color: orangered;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+
+    .tabs button {
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 10px;
+      border-bottom: 2px solid transparent;
+    }
+
+    .tabs button.active {
+      border-color: orangered;
+      color: orangered;
+      font-weight: bold;
+    }
+
+    form {
+      display: none;
+      flex-direction: column;
+    }
+
+    form.active {
+      display: flex;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"] {
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button.submit {
+      background: none;
+      color: black;
+      border: 1px solid black;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.6s ease;
+    }
+
+    button.submit:hover {
+      color: white;
+      background: orangered;
+    }
+
+    .message {
+      margin-top: 15px;
+      color: green;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: -5px;
+    }
+
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 6px solid #ccc;
+      border-top: 6px solid orangered;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      z-index: 999;
+    }
+
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <a class="logo" href="#" data-aos="fade-down" data-aos-duration="1500">LEN<span>FORM</span></a>
+
+    <div class="navbar">
+      <a href="index.html" data-aos="fade-up" data-aos-duration="2000">Home</a>
+      <a href="about.html" data-aos="fade-down" data-aos-duration="3000">About</a>
+      <a href="courses.html" data-aos="fade-down" data-aos-duration="3000">Courses</a>
+      <a href="contact.html" data-aos="fade-up" data-aos-duration="2000">Contact Us</a>
+      <a id="sign" href="started.html">SIGN IN</a>
+    </div>
+
+    <a class="sign-in" href="started.html" data-aos="fade-down" data-aos-duration="1500">
+      <button class="btn">SIGN IN</button>
+    </a>
+
+    <div class="burger" onclick="toggleMenu()" data-aos="fade-left" data-aos-anchor="#example-anchor" data-aos-offset="500" data-aos-duration="2000">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </header>
+
+  <!-- Login/Register Container -->
+  <div class="container" id="con">
+    <h2>Login or Re<span>gist Here</span></h2>
+    <div class="tabs">
+      <button id="loginTab" class="active">Login</button>
+      <button id="registerTab">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="loginForm" class="active">
+      <input type="email" id="loginEmail" placeholder="Email">
+      <div class="error" id="loginEmailError"></div>
+      <input type="password" id="loginPassword" placeholder="Password">
+      <div class="error" id="loginPasswordError"></div>
+      <button type="button" class="submit" onclick="login()">Login</button>
+    </form>
+
+    <!-- Register Form -->
+    <form id="registerForm">
+      <input type="text" id="regName" placeholder="Full Name">
+      <div class="error" id="regNameError"></div>
+      <input type="email" id="regEmail" placeholder="Email">
+      <div class="error" id="regEmailError"></div>
+      <input type="password" id="regPassword" placeholder="Password">
+      <div class="error" id="regPasswordError"></div>
+      <input type="password" id="regConfirm" placeholder="Confirm Password">
+      <div class="error" id="regConfirmError"></div>
+      <button type="button" class="submit" onclick="register()">Register</button>
+    </form>
+
+    <div class="message" id="message"></div>
+  </div>
+
+  <!-- Loader -->
+  <div id="loader" class="loader"></div>
+
+  <!-- Scripts -->
+  <script src="index.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>AOS.init();</script>
+
+  <script>
+    const loginTab = document.getElementById('loginTab');
+    const registerTab = document.getElementById('registerTab');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const message = document.getElementById('message');
+    const loader = document.getElementById('loader');
+    const con = document.getElementById('con');
+
+    loginTab.onclick = () => {
+      loginTab.classList.add('active');
+      registerTab.classList.remove('active');
+      loginForm.classList.add('active');
+      registerForm.classList.remove('active');
+      message.innerHTML = '';
+      loader.style.display = 'none';
+      clearErrors();
+    };
+
+    registerTab.onclick = () => {
+      registerTab.classList.add('active');
+      loginTab.classList.remove('active');
+      registerForm.classList.add('active');
+      loginForm.classList.remove('active');
+      message.innerHTML = '';
+      loader.style.display = 'none';
+      clearErrors();
+    };
+
+    function clearErrors() {
+      document.querySelectorAll('.error').forEach(el => el.innerHTML = '');
+    }
+
+    function login() {
+      clearErrors();
+      let email = document.getElementById('loginEmail').value;
+      let password = document.getElementById('loginPassword').value;
+      let valid = true;
+
+      if (email === "") {
+        document.getElementById('loginEmailError').innerHTML = "Email required";
+        valid = false;
+      }
+
+      if (password === "") {
+        document.getElementById('loginPasswordError').innerHTML = "Password required";
+        valid = false;
+      }
+
+      if (valid) {
+        message.style.color = 'green';
+        message.innerHTML = "Login Successful!";
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'none';
+        con.style.display = 'none';
+        loader.style.display = 'block';
+        setTimeout(() => {
+          window.location.href = 'courses.html';
+        }, 7000);
+      } else {
+        message.innerHTML = "";
+      }
+    }
+
+    function register() {
+      clearErrors();
+      let name = document.getElementById('regName').value;
+      let email = document.getElementById('regEmail').value;
+      let password = document.getElementById('regPassword').value;
+      let confirm = document.getElementById('regConfirm').value;
+      let valid = true;
+
+      if (name === "") {
+        document.getElementById('regNameError').innerHTML = "Name required";
+        valid = false;
+      }
+
+      if (email === "") {
+        document.getElementById('regEmailError').innerHTML = "Email required";
+        valid = false;
+      }
+
+      if (password === "") {
+        document.getElementById('regPasswordError').innerHTML = "Password required";
+        valid = false;
+      }
+
+      if (confirm === "") {
+        document.getElementById('regConfirmError').innerHTML = "Confirm password";
+        valid = false;
+      } else if (password !== confirm) {
+        document.getElementById('regConfirmError').innerHTML = "Passwords do not match";
+        valid = false;
+      }
+
+      if (valid) {
+        message.style.color = 'green';
+        message.innerHTML = "Registration Successful!";
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'none';
+        con.style.display = 'none';
+        loader.style.display = 'block';
+        setTimeout(() => {
+          window.location.href = 'courses.html';
+        }, 7000);
+      } else {
+        message.innerHTML = "";
+      }
+    }
+  </script>
+</body>
+</html>

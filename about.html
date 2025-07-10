@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About-Us</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+  <link rel="stylesheet" href="style.css"/>
+
+  <style>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  body {
+    background-color: #80c5de;
+    box-shadow: inset 0 0 50px #1c637c;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .h-A{
+    height:50px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px black,1px 1px 1px black;
+  }
+  .h-A span {
+    color: orangered;
+  }
+
+  .our-info {
+    width: 900px;
+    min-height: 400px;
+    border-radius: 20px;
+    background: linear-gradient(90deg, rgba(177, 124, 214, 1) 0%, rgba(212, 83, 83, 1) 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 30px 40px;
+    gap: 40px;
+    box-sizing: border-box;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    box-shadow: 4px 4px 10px black;
+  }
+
+  .our-info h3 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: white;
+    text-shadow: 0 0 10px black, 0 0 4px black;
+  }
+
+  .our-info h3 span {
+    color: orangered;
+  }
+
+  .our-info .text {
+    max-width: 400px;
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .our-info img {
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 0 10px black, 0 0 4px black;
+  }
+
+  /* Footer */
+  .footer {
+  width: 100%;
+  height:200px;
+  margin-top: auto;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  text-align: center;
+  padding: 20px 10px;
+  font-size: 14px;
+}
+
+
+  @media (max-width: 768px) {
+    .our-info {
+      flex-direction: column;
+      width: 340px;
+    }
+    .our-info img {
+      width: 300px;
+    }
+    .footer{
+      position: absolute;
+      top: 170rem;
+    }
+  }
+  </style>
+</head>
+<body>
+<!-- HEADER -->
+<header class="header">
+  <a class="logo" href="#" data-aos="fade-down" data-aos-duration="1500">LEN<span>FORM</span></a>
+
+  <div class="navbar">
+    <a href="index.html" data-aos="fade-up" data-aos-duration="2000">Home</a>
+    <a href="#" data-aos="fade-down" data-aos-duration="3000">About</a>
+    <a href="courses.html" data-aos="fade-down" data-aos-duration="3000">Courses</a>
+    <a href="contact.html" data-aos="fade-up" data-aos-duration="2000">Contact Us</a>
+    <a id="sign" href="started.html">SIGN IN</a>
+  </div>
+
+  <a class="sign-in" href="started.html" data-aos="fade-down" data-aos-duration="1500">
+    <button class="btn">SIGN IN</button>
+  </a>
+
+  <div class="burger" onclick="toggleMenu()" data-aos="fade-left"data-aos-anchor="#example-anchor"
+     data-aos-offset="500"
+     data-aos-duration="2000">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<main>
+<section class="about">
+  <div class="container">
+    <h2 class="h-A" data-aos="fade-down" data-aos-duration="1500">About <span>Us</span></h2>
+
+    <div class="our-info" data-aos="flip-left"
+data-aos-easing="ease-out-cubic"
+data-aos-duration="2000">
+      <div>
+        <h3>Our <span>Information</span></h3>
+        <p class="text">This is Lenform English online College, first time it founded directly 2016, our location Fully online with offices in Hargeisa/Somaliland.</p>
+      </div>
+      <img src="about.jpg" alt="">
+    </div>
+
+    <div class="our-info" data-aos="zoom-in-right" data-aos-duration="2000">
+      <div>
+        <h3>About <span>Teaching</span></h3>
+        <p class="text">Global English Online College is a virtual learning platform dedicated to teaching English language skills to students from all over the world. Its courses are designed for beginners to advanced learners, focusing on practical communication for daily life, work, and academic goals.</p>
+      </div>
+      <img src="teaching.jpg" alt="">
+    </div>
+
+    <div class="our-info" data-aos="fade-up" data-aos-duration="1000">
+      <div>
+        <h3>Learning <span>Style</span></h3>
+        <p class="text">100% online classes
+Live video lessons with native English teachers
+Recorded lessons for revision anytime
+Weekly speaking practice groups
+Daily vocabulary and pronunciation practice
+Personal feedback on writing and speaking.</p>
+      </div>
+      <img src="online-T.jpg" alt="">
+    </div>
+    
+        <div class="our-info" data-aos="zoom-in-left" data-aos-duration="1000">
+      <div>
+        <h3>Why Student <span>Love It</span></h3>
+        <p class="text">100% online classes
+Live video lessons with native English teachers
+Recorded lessons for revision anytime
+Weekly speaking practice groups
+Daily vocabulary and pronunciation practice
+Personal feedback on writing and speaking.</p>
+      </div>
+      <img src="like-learning.jpg" alt="">
+    </div>
+    
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2025 Lenform.com | All rights reserved.</p>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+ <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<script src="index.js"></script>
+</body>
+</html>

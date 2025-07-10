@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>lenform.com</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!--HEADER -->
+<header class="header">
+  <a class="logo" href="#" data-aos="fade-down" data-aos-duration="1500">LEN<span>FORM</span></a>
+  
+  <div class="navbar">
+    <a href="index.html" data-aos="fade-up" data-aos-duration="2000">Home</a>
+    <a href="about.html" data-aos="fade-down" data-aos-duration="3000">About</a>
+    <a href="courses.html" data-aos="fade-down" data-aos-duration="3000">Courses</a>
+    <a href="contact.html" data-aos="fade-up" data-aos-duration="2000">Contact Us</a>
+    <a id="sign" href="started.html">SIGN IN</a>
+  </div>
+  
+  <a class="sign-in" href="started.html" data-aos="fade-down" data-aos-duration="1500">
+    <button class="btn">SIGN IN</button>
+  </a>
+
+  <div class="burger" onclick="toggleMenu()" data-aos="fade-left"
+     data-aos-anchor="#example-anchor"
+     data-aos-offset="500"
+     data-aos-duration="2000">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</header>
+
+<!-- Home Section -->
+<section class="home" id="home">
+  <h1 data-aos="zoom-in" data-aos-duration="1500">Welcome to lenform</h1>
+  <p data-aos="fade-down" data-aos-duration="1500">Empower your learning journey with our courses and resources.</p>
+  <div class="eng-jour" data-aos="zoom-in" data-aos-duration="2000">
+  <box-icon name='hand-right' type='solid' color='white'></box-icon>
+  <p>"Your English journey starts here."</p>
+</div>
+  <a href="started.html"><button class="btn2" data-aos="fade-up" data-aos-duration="1500">Get Started</button></a>
+  
+</section>
+
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+ <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<script src="index.js"></script>
+</body>
+</html>

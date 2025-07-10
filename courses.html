@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Courses</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #80c5de;
+      box-shadow: inset 0 0 50px #1c637c;
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      padding: 80px 20px 50px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 48px;
+      color: #fff;
+      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    header p {
+      margin: 15px 0 0;
+      font-size: 20px;
+      color: #f0f0f0;
+    }
+
+    .courses-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .courses {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .course-card {
+      background: #ffffffcc;
+      border-radius: 12px;
+      padding: 30px 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .course-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .course-card h2 {
+      margin-top: 0;
+      font-size: 26px;
+      color: #333;
+    }
+
+    .course-card p {
+      font-size: 16px;
+      color: #555;
+      margin: 10px 0 20px;
+    }
+
+    .course-info {
+      margin: 15px 0;
+      font-size: 16px;
+      color: #444;
+    }
+
+    .course-info span {
+      display: block;
+      margin: 5px 0;
+    }
+
+    .adjust-buttons button,
+    .course-card button.start {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      background: #4facfe;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .adjust-buttons button:hover,
+    .course-card button.start:hover {
+      background: #00f2fe;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #fff;
+      font-size: 15px;
+      background: rgba(0, 0, 0, 0.2);
+      margin-top: 50px;
+    }
+
+    /* Quiz Styles */
+    #quiz {
+      display: none;
+      background: #ffffffcc;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 500px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    #quiz h2 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    #quiz p {
+      margin-bottom: 15px;
+      font-size: 16px;
+      color: #444;
+    }
+
+    #quiz input[type="text"] {
+      padding: 10px;
+      width: 80%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
+
+    #quiz button {
+      padding: 10px 20px;
+      font-size: 15px;
+      border: none;
+      border-radius: 6px;
+      background: #4facfe;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #quiz button:hover {
+      background: #00f2fe;
+    }
+
+    #result {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    @media(min-width:1400px) {
+      header h1 {
+        font-size: 54px;
+      }
+
+      .course-card h2 {
+        font-size: 28px;
+      }
+
+      .course-card p {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <a class="logo" href="#" data-aos="fade-down" data-aos-duration="1500">LEN<span>FORM</span></a>
+
+    <div class="navbar">
+      <a href="index.html" data-aos="fade-up" data-aos-duration="2000">Home</a>
+      <a href="about.html" data-aos="fade-down" data-aos-duration="3000">About</a>
+      <a href="courses.html" data-aos="fade-down" data-aos-duration="3000">Courses</a>
+      <a href="contact.html" data-aos="fade-up" data-aos-duration="2000">Contact Us</a>
+      <a id="sign" href="started.html">SIGN IN</a>
+    </div>
+
+    <a class="sign-in" href="started.html" data-aos="fade-down" data-aos-duration="1500">
+      <button class="btn">SIGN IN</button>
+    </a>
+
+    <div class="burger" onclick="toggleMenu()" data-aos="fade-left" data-aos-anchor="#example-anchor" data-aos-offset="500" data-aos-duration="2000">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </header>
+
+  <header>
+    <h1 data-aos="zoom-in" data-aos-duration="2000">Learn English Online</h1>
+    <p data-aos="fade-up" data-aos-duration="2000">Improve your English skills with our structured courses</p>
+  </header>
+
+  <!-- COURSES -->
+  <div class="courses-container">
+    <section class="courses">
+      <div class="course-card" data-aos="fade-down" data-aos-duration="1500">
+        <h2>Beginner Course</h2>
+        <p>Start with basic vocabulary, grammar, reading, and writing.</p>
+        <div class="course-info">
+          <span id="beginner-lessons">Lessons: 10</span>
+          <span id="beginner-price">Price: $50</span>
+        </div>
+        <div class="adjust-buttons">
+          <button onclick="adjustLessons('beginner', -1)">-</button>
+          <button onclick="adjustLessons('beginner', 1)">+</button>
+        </div>
+        <a href="#quiz"><button class="start" onclick="startQuiz('beginner')">Start Beginner Quiz</button>
+      </div>
+
+      <div class="course-card" data-aos="zoom-in-left" data-aos-duration="2000">
+        <h2>Intermediate Course</h2>
+        <p>Enhance sentence structures, vocabulary, and writing confidence.</p>
+        <div class="course-info">
+          <span id="intermediate-lessons">Lessons: 20</span>
+          <span id="intermediate-price">Price: $100</span>
+        </div>
+        <div class="adjust-buttons">
+          <button onclick="adjustLessons('intermediate', -1)">-</button>
+          <button onclick="adjustLessons('intermediate', 1)">+</button>
+        </div>
+        <a href="#quiz"><button class="start" onclick="startQuiz('intermediate')">Start Intermediate Quiz</button></a>
+      </div>
+
+      <div class="course-card" data-aos="zoom-in-right" data-aos-duration="2500">
+        <h2>Advanced Course</h2>
+        <p>Master advanced grammar, vocabulary, and fluent communication.</p>
+        <div class="course-info">
+          <span id="advanced-lessons">Lessons: 30</span>
+          <span id="advanced-price">Price: $150</span>
+        </div>
+        <div class="adjust-buttons">
+          <button onclick="adjustLessons('advanced', -1)">-</button>
+          <button onclick="adjustLessons('advanced', 1)">+</button>
+        </div>
+        <a href="#quiz"><button class="start" onclick="startQuiz('advanced')">Start Advanced Quiz</button></a>
+      </div>
+    </section>
+  </div>
+
+  <!-- QUIZ SECTION -->
+  <div id="quiz">
+    <h2 id="quizTitle">Quiz</h2>
+    <p id="question">Question will appear here</p>
+    <input type="text" id="answer" placeholder="Type your answer">
+    <br>
+    <button onclick="checkAnswer()">Check Answer</button>
+    <div id="result"></div>
+  </div>
+
+  <footer>
+    © 2025 Lenform.com | All rights reserved.
+  </footer>
+
+  <!-- ✅ YOUR ORIGINAL SCRIPT LINKS -->
+  <script src="index.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    // Price calculation logic
+    const courses = { beginner: 10, intermediate: 20, advanced: 30 };
+    const pricePerLesson = 5;
+
+    function adjustLessons(course, change) {
+      courses[course] += change;
+      if (courses[course] < 1) courses[course] = 1;
+      document.getElementById(course + '-lessons').innerText = "Lessons: " + courses[course];
+      document.getElementById(course + '-price').innerText = "Price: $" + (courses[course] * pricePerLesson);
+    }
+
+    // Quiz logic
+    const quizData = {
+      beginner: [
+        { q: "Translate 'Biyo' to English", a: "water" },
+        { q: "Translate 'water' to Somali", a: "biyo" },
+        { q: "Translate 'Cunto' to English", a: "food" },
+        { q: "Translate 'food' to Somali", a: "cunto" },
+        { q: "Translate 'Magac' to English", a: "name" }
+      ],
+      intermediate: [
+        { q: "What is the past tense of 'go'?", a: "went" },
+        { q: "Translate 'Shaqo' to English", a: "work" },
+        { q: "Translate 'read' to Somali", a: "akhri" },
+        { q: "Translate 'Buug' to English", a: "book" },
+        { q: "Translate 'school' to Somali", a: "iskuul" }
+      ],
+      advanced: [
+        { q: "Form a sentence using 'although'.", a: "although" },
+        { q: "Translate 'Horumar' to English", a: "progress" },
+        { q: "Translate 'success' to Somali", a: "guul" },
+        { q: "Translate 'Fikrad' to English", a: "idea" },
+        { q: "Translate 'achieve' to Somali", a: "gaadh" }
+      ]
+    };
+
+    let currentStage = "";
+    let currentIndex = 0;
+
+    function startQuiz(stage) {
+      currentStage = stage;
+      currentIndex = 0;
+      document.getElementById('quiz').style.display = "block";
+      document.getElementById('result').innerText = "";
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const q = quizData[currentStage][currentIndex];
+      document.getElementById('quizTitle').innerText = currentStage.charAt(0).toUpperCase() + currentStage.slice(1) + " Quiz";
+      document.getElementById('question').innerText = q.q;
+      document.getElementById('answer').value = "";
+    }
+
+    function checkAnswer() {
+      const userAnswer = document.getElementById('answer').value.toLowerCase().trim();
+      const correct = quizData[currentStage][currentIndex].a.toLowerCase();
+      const result = document.getElementById('result');
+
+      if (currentStage === "advanced" && quizData[currentStage][currentIndex].q.includes("although")) {
+        if (userAnswer.includes("although")) {
+          result.innerText = "Good job!";
+          result.style.color = "green";
+        } else {
+          result.innerText = "Include 'although' in your sentence.";
+          result.style.color = "red";
+          return;
+        }
+      } else {
+        if (userAnswer === correct) {
+          result.innerText = "Correct!";
+          result.style.color = "green";
+        } else {
+          result.innerText = "Try again.";
+          result.style.color = "red";
+          return;
+        }
+      }
+
+      currentIndex++;
+      if (currentIndex < quizData[currentStage].length) {
+        setTimeout(() => {
+          result.innerText = "";
+          loadQuestion();
+        }, 1000);
+      } else {
+        result.innerText = "Quiz complete!";
+      }
+    }
+  </script>
+</body>
+</html>

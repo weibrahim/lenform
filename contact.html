@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>contact-us</title>
+  
+  <!-- AOS Animation -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  
+  <!-- Boxicons -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  
+  <!-- Your main stylesheet -->
+  <link rel="stylesheet" href="style.css"/>
+  
+  <style>
+    /* Contact page specific styling */
+    .contact-section {
+      max-width: 600px;
+      margin: 100px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    
+    .contact-section h2 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #333;
+    }
+    .contact-section h2 span{
+      color: orangered;
+    }
+    
+    .contact-section form {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .contact-section input,
+    .contact-section textarea {
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      resize: none;
+    }
+    
+    .contact-section button {
+      background: none;
+      color: black;
+      padding: 10px;
+      border: 1px solid black;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      transition:all 0.4s ease;
+    }
+    
+    .contact-section button:hover {
+      background: orangered;
+    }
+    
+    .contact-section p {
+      margin-top: 15px;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<!--HEADER -->
+<header class="header">
+  <a class="logo" href="#" data-aos="fade-down" data-aos-duration="1500">LEN<span>FORM</span></a>
+  
+  <div class="navbar">
+    <a href="index.html" data-aos="fade-up" data-aos-duration="2000">Home</a>
+    <a href="about.html" data-aos="fade-down" data-aos-duration="3000">About</a>
+    <a href="courses.html" data-aos="fade-down" data-aos-duration="3000">Courses</a>
+    <a href="contact.html" data-aos="fade-up" data-aos-duration="2000">Contact Us</a>
+    <a id="sign" href="started.html">SIGN IN</a>
+  </div>
+  
+  <a class="sign-in" href="started.html" data-aos="fade-down" data-aos-duration="1500">
+    <button class="btn">SIGN IN</button>
+  </a>
+
+  <div class="burger" onclick="toggleMenu()" data-aos="fade-left"
+     data-aos-anchor="#example-anchor"
+     data-aos-offset="500"
+     data-aos-duration="2000">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</header>
+
+<!-- Contact Section -->
+<section class="contact-section" data-aos="fade-up" data-aos-duration="1500">
+  <h2>Contact <span>Us</span></h2>
+  <form id="contactForm">
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="email" id="email" placeholder="Your Email" required>
+    <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+    <p id="successMsg"></p>
+  </form>
+</section>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init();
+
+  // Contact form submission
+  document.getElementById("contactForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    
+    // Here you can integrate backend email sending or API call
+    document.getElementById("successMsg").innerText = "Message sent successfully!";
+    
+    // Clear form
+    this.reset();
+  });
+</script>
+
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<script src="index.js"></script>
+
+</body>
+</html>
