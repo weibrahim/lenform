@@ -192,115 +192,167 @@
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>AOS.init();</script>
 
-  <script>
-    const loginTab = document.getElementById('loginTab');
-    const registerTab = document.getElementById('registerTab');
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
-    const message = document.getElementById('message');
-    const loader = document.getElementById('loader');
-    const con = document.getElementById('con');
+  
+<!-- Continued from above -->
+<!-- Hidden Registered Users Section -->
+<div id="registeredUsersSection" style="display: none;">
+  <h3>Registered Users</h3>
+  <ul id="userList"></ul>
+</div>
 
-    loginTab.onclick = () => {
-      loginTab.classList.add('active');
-      registerTab.classList.remove('active');
-      loginForm.classList.add('active');
-      registerForm.classList.remove('active');
-      message.innerHTML = '';
-      loader.style.display = 'none';
-      clearErrors();
-    };
+<script>
+  const loginTab = document.getElementById('loginTab');
+  const registerTab = document.getElementById('registerTab');
+  const loginForm = document.getElementById('loginForm');
+  const registerForm = document.getElementById('registerForm');
+  const message = document.getElementById('message');
+  const loader = document.getElementById('loader');
+  const con = document.getElementById('con');
+  const registeredUsersSection = document.getElementById('registeredUsersSection');
+  const userList = document.getElementById('userList');
 
-    registerTab.onclick = () => {
-      registerTab.classList.add('active');
-      loginTab.classList.remove('active');
-      registerForm.classList.add('active');
-      loginForm.classList.remove('active');
-      message.innerHTML = '';
-      loader.style.display = 'none';
-      clearErrors();
-    };
+  loginTab.onclick = () => {
+    loginTab.classList.add('active');
+    registerTab.classList.remove('active');
+    loginForm.classList.add('active');
+    registerForm.classList.remove('active');
+    message.innerHTML = '';
+    loader.style.display = 'none';
+    clearErrors();
+  };
 
-    function clearErrors() {
-      document.querySelectorAll('.error').forEach(el => el.innerHTML = '');
+  registerTab.onclick = () => {
+    registerTab.classList.add('active');
+    loginTab.classList.remove('active');
+    registerForm.classList.add('active');
+    loginForm.classList.remove('active');
+    message.innerHTML = '';
+    loader.style.display = 'none';
+    clearErrors();
+  };
+
+  function clearErrors() {
+    document.querySelectorAll('.error').forEach(el => el.innerHTML = '');
+  }
+
+  function getUsers() {
+    return JSON.parse(localStorage.getItem('users')) || [];
+  }
+
+  function setUsers(users) {
+    localStorage.setItem('users', JSON.stringify(users));
+  }
+
+  function login() {
+    clearErrors();
+    let email = document.getElementById('loginEmail').value.trim();
+    let password = document.getElementById('loginPassword').value.trim();
+    let valid = true;
+
+    if (email === "") {
+      document.getElementById('loginEmailError').innerHTML = "Email required";
+      valid = false;
     }
 
-    function login() {
-      clearErrors();
-      let email = document.getElementById('loginEmail').value;
-      let password = document.getElementById('loginPassword').value;
-      let valid = true;
-
-      if (email === "") {
-        document.getElementById('loginEmailError').innerHTML = "Email required";
-        valid = false;
-      }
-
-      if (password === "") {
-        document.getElementById('loginPasswordError').innerHTML = "Password required";
-        valid = false;
-      }
-
-      if (valid) {
-        message.style.color = 'green';
-        message.innerHTML = "Login Successful!";
-        loginForm.style.display = 'none';
-        registerForm.style.display = 'none';
-        con.style.display = 'none';
-        loader.style.display = 'block';
-        setTimeout(() => {
-          window.location.href = 'courses.html';
-        }, 7000);
-      } else {
-        message.innerHTML = "";
-      }
+    if (password === "") {
+      document.getElementById('loginPasswordError').innerHTML = "Password required";
+      valid = false;
     }
 
-    function register() {
-      clearErrors();
-      let name = document.getElementById('regName').value;
-      let email = document.getElementById('regEmail').value;
-      let password = document.getElementById('regPassword').value;
-      let confirm = document.getElementById('regConfirm').value;
-      let valid = true;
-
-      if (name === "") {
-        document.getElementById('regNameError').innerHTML = "Name required";
-        valid = false;
-      }
-
-      if (email === "") {
-        document.getElementById('regEmailError').innerHTML = "Email required";
-        valid = false;
-      }
-
-      if (password === "") {
-        document.getElementById('regPasswordError').innerHTML = "Password required";
-        valid = false;
-      }
-
-      if (confirm === "") {
-        document.getElementById('regConfirmError').innerHTML = "Confirm password";
-        valid = false;
-      } else if (password !== confirm) {
-        document.getElementById('regConfirmError').innerHTML = "Passwords do not match";
-        valid = false;
-      }
-
-      if (valid) {
-        message.style.color = 'green';
-        message.innerHTML = "Registration Successful!";
-        loginForm.style.display = 'none';
-        registerForm.style.display = 'none';
-        con.style.display = 'none';
-        loader.style.display = 'block';
-        setTimeout(() => {
-          window.location.href = 'courses.html';
-        }, 7000);
-      } else {
-        message.innerHTML = "";
-      }
+    if (!valid) {
+      message.innerHTML = "";
+      return;
     }
-  </script>
+
+    let users = getUsers();
+    let user = users.find(u => u.email === email && u.password === password);
+
+    if (user) {
+      message.style.color = 'green';
+      message.innerHTML = "Login Successful!";
+      loader.style.display = 'block';
+      loginForm.style.display = 'none';
+      registerForm.style.display = 'none';
+      con.style.display = 'none';
+      setTimeout(() => {
+        window.location.href = 'courses.html';
+      }, 3000);
+    } else {
+      message.style.color = 'red';
+      message.innerHTML = "Invalid credentials!";
+    }
+  }
+
+  function register() {
+    clearErrors();
+    let name = document.getElementById('regName').value.trim();
+    let email = document.getElementById('regEmail').value.trim();
+    let password = document.getElementById('regPassword').value.trim();
+    let confirm = document.getElementById('regConfirm').value.trim();
+    let valid = true;
+
+    if (name === "") {
+      document.getElementById('regNameError').innerHTML = "Name required";
+      valid = false;
+    }
+
+    if (email === "") {
+      document.getElementById('regEmailError').innerHTML = "Email required";
+      valid = false;
+    }
+
+    if (password === "") {
+      document.getElementById('regPasswordError').innerHTML = "Password required";
+      valid = false;
+    }
+
+    if (confirm === "") {
+      document.getElementById('regConfirmError').innerHTML = "Confirm password";
+      valid = false;
+    } else if (password !== confirm) {
+      document.getElementById('regConfirmError').innerHTML = "Passwords do not match";
+      valid = false;
+    }
+
+    if (!valid) {
+      message.innerHTML = "";
+      return;
+    }
+
+    let users = getUsers();
+
+    if (users.some(u => u.email === email)) {
+      message.style.color = 'red';
+      message.innerHTML = "User already registered!";
+      return;
+    }
+
+    users.push({ name, email, password });
+    setUsers(users);
+
+    message.style.color = 'green';
+    message.innerHTML = "Registration Successful!";
+    loader.style.display = 'block';
+    loginForm.style.display = 'none';
+    registerForm.style.display = 'none';
+    con.style.display = 'none';
+
+    setTimeout(() => {
+      window.location.href = 'courses.html';
+    }, 3000);
+  }
+
+  // Optional: show registered users (for testing)
+  function showUsers() {
+    let users = getUsers();
+    userList.innerHTML = "";
+    users.forEach(user => {
+      let li = document.createElement('li');
+      li.textContent = `${user.name} - ${user.email}`;
+      userList.appendChild(li);
+    });
+    registeredUsersSection.style.display = 'block';
+  }
+</script>
 </body>
 </html>
